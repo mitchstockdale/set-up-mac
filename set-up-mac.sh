@@ -12,13 +12,20 @@ printf "Install XCode"
 xcode-select --install
 read -n 1 -s -p "Install XCode dialog requested. Install and then press any key to continue..."
 
-readarray PACKAGES < < <(grep -v '^#' < ./brew-packages)
+GIT_URL="https://raw.githubusercontent.com/mitchstockdale/set-up-mac/master"
+
+SOFTWARE_LISTS=( brew-casks brew-fonts brew-packages vscode-extensions )
+for file in "${SOFTWARE_LISTS[@]}"; do
+	echo "Downloading $file"
+ 	curl "${GIT_URL}"/"${file}" -o "~/$file"
+done
+
+readarray PACKAGES < <(grep -v '^#' < ./brew-packages)
 readarray CASKS < <(grep -v '^#' < ./brew-casks)
 readarray FONTS < <(grep -v '^#' < ./brew-fonts)
 readarray VSCODE_EXTENSIONS < <(grep -v '^#' < ./vscode-extensions)
 
-# Make my directories
-echo "Making my directories under HOME (~), i.e. under $HOME"
+echo "Creating directories under $HOME"
 mkdir ~/bin
 mkdir ~/iso
 mkdir ~/lab
@@ -26,7 +33,7 @@ mkdir ~/tmp
 mkdir ~/vm-share
 mkdir ~/code
 mkdir ~/.config
-echo "Directory structure under $HOME is now:"
+echo "Directory structure under $HOME:"
 ls -d */
 
 # SSH keys
@@ -46,7 +53,6 @@ EOT
 ssh-add -K ~/.ssh/id_rsa
 read -p "Copy key details and then press <return> to continue"
 
-# Install Homebrew itself
 echo "Installing Homebrew ..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 export PATH="/opt/homebrew/bin:$PATH"
@@ -65,13 +71,13 @@ brew tap homebrew/cask-fonts
 printf "Installing packages...\n"
 brew install ${PACKAGES[@]}
 
-printf "Installing cask apps...\n\n"
+printf "Installing cask apps...\n"
 brew install --cask ${CASKS[@]}
 
 printf "Installing fonts...\n"
 brew install --cask ${FONTS[@]}
 
-printf "Cleaning up Brew...\n\n"
+printf "Cleaning up Brew...\n"
 brew cleanup -s
 rm -rf "$(brew --cache)"
 
@@ -91,35 +97,11 @@ mkdir -p ~/.zsh
 #   - https://superuser.com/questions/183870/difference-between-bashrc-and-bash-profile/183980#183980
 
 echo "Downloading dot files..."
-# .aliases
-echo "Downloading .aliases"
-wget https://raw.githubusercontent.com/mitchstockdale/set-up-mac/master/.aliases -P ~
-
-# .profile
-echo "Downloading .profile"
-wget https://raw.githubusercontent.com/mitchstockdale/set-up-mac/master/.profile -P ~
-
-# .bashrc
-echo "Downloading .bashrc"
-wget https://raw.githubusercontent.com/mitchstockdale/set-up-mac/master/.bashrc -P ~
-
-# .bash_profile
-echo "Downloading .bash_profile"
-wget https://raw.githubusercontent.com/mitchstockdale/set-up-mac/master/.bash_profile -P ~
-
-# .zprofile
-echo "Downloading .bash_profile"
-wget https://raw.githubusercontent.com/mitchstockdale/set-up-mac/master/.zprofile -P ~
-
-echo "Downloading .zshrc"
-wget https://raw.githubusercontent.com/mitchstockdale/set-up-mac/master/.zshrc -P ~
-
-echo "Downloading .hyper.js"
-wget https://raw.githubusercontent.com/mitchstockdale/set-up-mac/master/.hyper.js -P ~
-
-# .vimrc (Vim)
-echo "Downloading .vimrc"
-wget https://raw.githubusercontent.com/mitchstockdale/set-up-mac/master/.vimrc -P ~
+DOT_FILES=( .aliases .profile .bashrc .bash_profile .zprofile .zshrc .hyper.js .vimrc starship.toml .git-prompt-colors.sh )
+for file in "${DOT_FILES[@]}"; do
+	echo "Downloading $file"
+ 	wget "${GIT_URL}"/"${file}" -P ~
+done
 
 # Download history config
 wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/lib/history.zsh -P ~/.zsh
@@ -130,7 +112,7 @@ wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/lib/key-bin
 # Download completion config
 wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/lib/completion.zsh -P ~/.zsh
 
-# VS Code extensions
+echo "Installing VS Code Extensions..."
 for ext in "${VSCODE_EXTENSIONS[@]}"; do
    code --install-extension "$ext"
 done
