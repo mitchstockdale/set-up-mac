@@ -112,21 +112,21 @@ echo "Downloading dot files..."
 DOT_FILES=( .aliases .profile .bashrc .bash_profile .zprofile .zshrc .hyper.js .vimrc starship.toml .git-prompt-colors.sh )
 for file in "${DOT_FILES[@]}"; do
 	echo "Downloading $file"
- 	wget "${GIT_URL}"/"${file}" -P ~
+ 	wget -N "${GIT_URL}"/"${file}" -P ~
 done
 
 # Download history config
-wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/lib/history.zsh -P ~/.zsh
+wget -N https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/lib/history.zsh -P ~/.zsh
 
 # Download key bindings config
-wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/lib/key-bindings.zsh -P ~/.zsh
+wget -N https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/lib/key-bindings.zsh -P ~/.zsh
 
 # Download completion config
-wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/lib/completion.zsh -P ~/.zsh
+wget -N https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/lib/completion.zsh -P ~/.zsh
 
 echo "Installing VS Code Extensions..."
 for ext in "${VSCODE_EXTENSIONS[@]}"; do
-   code --install-extension "$ext"
+   code --install-extension "${ext//$'\n'}"
 done
 
 # Pycharm/IntelliJ theme
