@@ -66,7 +66,7 @@ export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 
 # colorls tab completion for flags
-source /Library/Ruby/Gems/2.6.0/gems/colorls-1.4.4/lib/tab_complete.sh
+source /Library/Ruby/Gems/2.6.0/gems/colorls-$(gem list | grep -i "colorls" | grep -o "\d\.\d\.\d")/lib/tab_complete.sh
 
 # terraform
 autoload -U +X bashcompinit && bashcompinit
