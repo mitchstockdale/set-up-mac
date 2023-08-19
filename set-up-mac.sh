@@ -69,13 +69,13 @@ brew tap hashicorp/tap
 brew tap homebrew/cask-fonts
 
 printf "Installing packages...\n"
-brew install ${PACKAGES[@]}
+brew install --formulae ${PACKAGES[@]}
 
 printf "Installing cask apps...\n"
-brew install --cask ${CASKS[@]}
+brew install --casks ${CASKS[@]}
 
 printf "Installing fonts...\n"
-brew install --cask ${FONTS[@]}
+brew install --casks ${FONTS[@]}
 
 printf "Cleaning up Brew...\n"
 brew cleanup -s
