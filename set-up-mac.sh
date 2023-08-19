@@ -69,16 +69,25 @@ brew tap hashicorp/tap
 brew tap homebrew/cask-fonts
 
 printf "Installing packages...\n"
-printf "brew install --formulae ${PACKAGES[@]}"
-brew install --formulae ${PACKAGES[@]}
+# Loop to avoid missing shas from preventing all package installations
+for package in "${PACKAGES[@]}"; do
+	echo "Installing $package"
+ 	brew install --formula $package
+done
 
 printf "Installing cask apps...\n"
-printf "brew install --casks ${CASKS[@]}"
-brew install --casks ${CASKS[@]}
+# Loop to avoid missing shas from preventing all package installations
+for cask in "${CASKS[@]}"; do
+	echo "Installing $cask"
+ 	brew install --cask $cask
+done
 
 printf "Installing fonts...\n"
-printf "brew install --casks ${FONTS[@]}"
-brew install --casks ${FONTS[@]}
+# Loop to avoid missing shas from preventing all package installations
+for font in "${FONTS[@]}"; do
+	echo "Installing $font"
+ 	brew install --cask $font
+done
 
 printf "Cleaning up Brew...\n"
 brew cleanup -s
