@@ -109,11 +109,14 @@ mkdir -p ~/.zsh
 #   - https://superuser.com/questions/183870/difference-between-bashrc-and-bash-profile/183980#183980
 
 echo "Downloading dot files..."
-DOT_FILES=( .aliases .profile .bashrc .bash_profile .zprofile .zshrc .hyper.js .vimrc starship.toml .git-prompt-colors.sh )
+DOT_FILES=( .aliases .profile .bashrc .bash_profile .zprofile .zshrc .hyper.js .vimrc .git-prompt-colors.sh )
 for file in "${DOT_FILES[@]}"; do
 	echo "Downloading $file"
  	wget -N "${GIT_URL}"/"${file}" -P ~
 done
+
+echo "Downloading starship prompt config"
+wget -N "${GIT_URL}"/starship.toml -P ~/.config/starship.toml
 
 # Download history config
 wget -N https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/lib/history.zsh -P ~/.zsh
@@ -130,7 +133,7 @@ for ext in "${VSCODE_EXTENSIONS[@]}"; do
 done
 
 # Pycharm/IntelliJ theme
-wget https://raw.githubusercontent.com/JordanForeman/idea-snazzy/master/snazzy.icls -P ~
+# wget https://raw.githubusercontent.com/JordanForeman/idea-snazzy/master/snazzy.icls -P ~
 
 sudo gem install colorls
 
