@@ -1,11 +1,8 @@
 piotrpalarz.vscode-gitignore-generator
 amazonwebservices.aws-toolkit-vscode
-hookyqr.beautify
 eamodio.gitlens
 ms-python.vscode-pylance
-paiqo.databricks-vscode
+databricks.databricks
 redhat.vscode-yaml
 hashicorp.terraform
-ms-azuretools.vscode-docker
 wayou.vscode-todo-highlight
-mhutchie.git-graph
