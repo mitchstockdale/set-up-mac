@@ -17,7 +17,7 @@ GIT_URL="https://raw.githubusercontent.com/mitchstockdale/set-up-mac/master"
 SOFTWARE_LISTS=( brew-casks brew-fonts brew-packages vscode-extensions )
 for file in "${SOFTWARE_LISTS[@]}"; do
 	echo "Downloading $file"
- 	curl "${GIT_URL}"/"${file}" -o "~/$file"
+ 	curl "${GIT_URL}"/"${file}" -o "$file"
 done
 
 readarray PACKAGES < <(grep -v '^#' < ./brew-packages)
@@ -26,13 +26,13 @@ readarray FONTS < <(grep -v '^#' < ./brew-fonts)
 readarray VSCODE_EXTENSIONS < <(grep -v '^#' < ./vscode-extensions)
 
 echo "Creating directories under $HOME"
-mkdir ~/bin
-mkdir ~/iso
-mkdir ~/lab
-mkdir ~/tmp
-mkdir ~/vm-share
-mkdir ~/code
-mkdir ~/.config
+mkdir -p ~/bin
+mkdir -p ~/iso
+mkdir -p ~/lab
+mkdir -p ~/tmp
+mkdir -p ~/vm-share
+mkdir -p ~/code
+mkdir -p ~/.config
 echo "Directory structure under $HOME:"
 ls -d */
 
@@ -69,12 +69,15 @@ brew tap hashicorp/tap
 brew tap homebrew/cask-fonts
 
 printf "Installing packages...\n"
+printf "brew install --formulae ${PACKAGES[@]}"
 brew install --formulae ${PACKAGES[@]}
 
 printf "Installing cask apps...\n"
+printf "brew install --casks ${CASKS[@]}"
 brew install --casks ${CASKS[@]}
 
 printf "Installing fonts...\n"
+printf "brew install --casks ${FONTS[@]}"
 brew install --casks ${FONTS[@]}
 
 printf "Cleaning up Brew...\n"
