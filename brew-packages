@@ -22,7 +22,7 @@ node
 # Cloud tools
 awscli
 aws-sam-cli
-azure-cli
+# azure-cli
 hashicorp/tap/terraform
 # Font requirements
 svn
