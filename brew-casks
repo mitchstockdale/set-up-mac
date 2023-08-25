@@ -1,5 +1,5 @@
 # Dev tools
-# docker
+docker
 sourcetree
 devtoys
 # Terminal
@@ -9,14 +9,14 @@ hyper
 # microsoft-edge
 # microsoft-teams
 # zoom
-slack
+# slack
 # alfred
-google-chrome
+# google-chrome
 # firefox
 # python@3.8
 # adoptopenjdk8
 # Text editors and IDEs
-visual-studio-code
+# visual-studio-code
 # dbeaver-community
 # rstudio
 # azure-data-studio
@@ -33,4 +33,8 @@ visual-studio-code
 # spotify
 # qgis
 # postman
-drawio
+# drawio
+asana
+notion
+rocket-typist
+maccy

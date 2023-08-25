@@ -10,18 +10,20 @@ zsh-syntax-highlighting
 zsh-autosuggestions
 z
 starship
+jq
 # Dev tools
 git
 # Pyenv
 pyenv
-pyenv-virtualenv
+pipenv
+# pyenv-virtualenv
 # Jenv
 jenv
 # Other
 node
 # Cloud tools
-awscli
-aws-sam-cli
+# awscli
+# aws-sam-cli
 # azure-cli
 hashicorp/tap/terraform
 # Font requirements
