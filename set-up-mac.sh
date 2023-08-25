@@ -5,7 +5,7 @@
 #  and Rob's repo: https://github.com/jarvisrob/set-up-mac
 
 printf "Starting bootstrapping\n"
-printf "Running script using bash version: $BASH_VERSION"
+printf "Running script using bash version: $BASH_VERSION\n"
 
 printf "Install XCode"
 
@@ -20,10 +20,22 @@ for file in "${SOFTWARE_LISTS[@]}"; do
  	curl "${GIT_URL}"/"${file}" -o "$file"
 done
 
-readarray PACKAGES < <(grep -v '^#' < ./brew-packages)
-readarray CASKS < <(grep -v '^#' < ./brew-casks)
-readarray FONTS < <(grep -v '^#' < ./brew-fonts)
-readarray VSCODE_EXTENSIONS < <(grep -v '^#' < ./vscode-extensions)
+# Load in variables without dependence on bash >= 4.0
+while IFS=\= read package; do
+    PACKAGES+=($package)
+done < <(grep -v '^#' < ./brew-packages)
+
+while IFS=\= read cask; do
+    CASKS+=($cask)
+done < <(grep -v '^#' < ./brew-casks)
+
+while IFS=\= read font; do
+    FONTS+=($font)
+done < <(grep -v '^#' < ./brew-fonts)
+
+while IFS=\= read vscode_extension; do
+    VSCODE_EXTENSIONS+=($vscode_extension)
+done < <(grep -v '^#' < ./vscode-extensions)
 
 echo "Creating directories under $HOME"
 mkdir -p ~/bin
@@ -116,7 +128,7 @@ for file in "${DOT_FILES[@]}"; do
 done
 
 echo "Downloading starship prompt config"
-wget -N "${GIT_URL}"/starship.toml -P ~/.config/starship.toml
+wget -N "${GIT_URL}"/starship.toml -P ~/.config
 
 # Download history config
 wget -N https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/lib/history.zsh -P ~/.zsh
@@ -160,9 +172,6 @@ echo "Finder settings"
 
 # Finder: show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-
-# Display full POSIX path as Finder window title
-defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
 # Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
 defaults write com.apple.finder QuitMenuItem -bool true
@@ -228,10 +237,8 @@ defaults write com.apple.screensaver askForPasswordDelay -int 0
 defaults -currentHost write com.apple.screensaver idleTime 300
 
 echo "Screenshot settings"
-
 # Save screenshots to the desktop
 defaults write com.apple.screencapture location -string "$HOME/Desktop"
-
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
 
@@ -242,6 +249,12 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 # Make Zsh the default shell
 echo 'Making Homebrew installed and updated Zsh the default shell. You will be prompted for root password.'
 chsh -s /opt/hombrew/bin/zsh
+
+# Cleanup after ourselves
+for file in "${SOFTWARE_LISTS[@]}"; do
+	echo "Removing $file"
+ 	rm -f  "$file"
+done
 
 # End
 echo "Mac set-up completed--enjoy!"

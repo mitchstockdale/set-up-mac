@@ -7,7 +7,7 @@ source ~/.aliases
 # From setup script
 #------------------
 # Add Homebrew to PATH
-export PATH="$(brew --prefix)/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
 
 # Ensure secure connections for brew
 export HOMEBREW_NO_INSECURE_REDIRECT=1
