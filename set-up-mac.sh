@@ -157,6 +157,34 @@ read -p "Enter global default Git email: " GIT_EMAIL
 git config --global user.name "Mitch Stockdale"
 git config --global user.email "$GIT_EMAIL"
 git config --global core.editor "code"
+# https://blog.gitbutler.com/how-git-core-devs-configure-git/
+git config --global column.ui auto
+# Sorts the branch list by the most recent commit date
+git config --global branch.sort -committerdate
+# Sort tags properly
+git config --global tag.sort version:refname
+git config --global init.defaultBranch main
+# Better diffs
+git config --global diff.algorithm histogram
+git config --global diff.colorMoved plain
+git config --global diff.mnemonicPrefix true
+git config --global diff.renames true
+# Better pushing
+git config --global push.default simple # (default since 2.0)
+git config --global push.autoSetupRemote true
+git config --global push.followTags true
+# Better fetching
+# Make sure we delete origin/blah if blah is deleted on the server
+git config --global fetch.prune true
+git config --global fetch.pruneTags true
+git config --global fetch.all true
+# Autocorrect prompt
+git config --global help.autocorrect prompt
+# Reuse recorded resolutions
+git config --global rerere.enabled true
+git config --global rerere.autoupdate true
+# Better pulling
+# git config --global pull.rebase true
 echo "... Done"
 
 # macOS settings
