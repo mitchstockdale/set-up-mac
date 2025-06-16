@@ -39,10 +39,10 @@ done < <(grep -v '^#' < ./vscode-extensions)
 
 echo "Creating directories under $HOME"
 mkdir -p ~/bin
-mkdir -p ~/iso
+# mkdir -p ~/iso
 mkdir -p ~/lab
 mkdir -p ~/tmp
-mkdir -p ~/vm-share
+# mkdir -p ~/vm-share
 mkdir -p ~/code
 mkdir -p ~/.config
 echo "Directory structure under $HOME:"

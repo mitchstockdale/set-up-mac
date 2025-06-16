@@ -1,10 +1,10 @@
-# Dev tools
+## Dev tools
 docker
 sourcetree
 devtoys
-# Terminal
+## Terminal
 hyper
-# Productivity
+## Productivity
 # microsoft-office
 # microsoft-edge
 # microsoft-teams
@@ -15,7 +15,7 @@ hyper
 # firefox
 # python@3.8
 # adoptopenjdk8
-# Text editors and IDEs
+## Text editors and IDEs
 visual-studio-code
 # dbeaver-community
 # rstudio
@@ -23,14 +23,14 @@ visual-studio-code
 # sublime-text
 # pycharm-ce
 # intellij-idea-ce
-# Cloud tools
+## Cloud tools
 # microsoft-azure-storage-explorer
 # Visual Analytics / Design
+## Misc
 # tableau-public
 # tableau
 # figma
-# Misc
-# spotify
+spotify
 # qgis
 # postman
 # drawio

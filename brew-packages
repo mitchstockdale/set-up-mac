@@ -1,5 +1,4 @@
-wget
-# Terminal tools and commands
+## Terminal tools and commands
 bash
 zsh
 bash-completion
@@ -13,20 +12,22 @@ starship
 jq
 # Dev tools
 git
-# Pyenv
+## Python
 pyenv
 pipenv
+uv
+pipx
 # pyenv-virtualenv
 # Jenv
 jenv
-# Other
+## Other
 node
 # Cloud tools
 # awscli
 # aws-sam-cli
 # azure-cli
 hashicorp/tap/terraform
-# Font requirements
+## Font requirements
 svn
-# Video tools
-handbrake
+## Video tools
+# handbrake
